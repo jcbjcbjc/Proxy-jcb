@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+enum MessageType
+{
+    NewCtlReq = 0;
+    NewCtlRsp = 1;
+    NewTunnelReq=2;
+    NewTunnelRsp=3;
+    FreeProxyConn=4;
+    NotifyClientCreateProxy=5;
+    NotifyShutdownProxy=6;
+
+
+    ClaimProxyConn=7;
+    StartProxyReq=8;
+    StartProxyRsp=9;
+
+    HeartBeatReq=10;
+    HeartBeatRsp=11;
+}
+
+
+message NetMsg{
+  MessageType messageType=1;
+  optional NewCtlReqMsg newCtlReq=2;
+  optional NewCtlRspMsg newCtlRsp=3;
+  optional NewTunnelReqMsg newTunnelReq=4;
+  optional NewTunnelRspMsg newTunnelRsp=5;
+  optional FreeProxyConnMsg freeProxyConn=6;
+  optional NotifyClientCreateProxyMsg notifyClientCreateProxy=7;
+  optional NotifyShutdownProxyMsg notifyShutdownProxy=8;
+
+  optional ClaimProxyConnMsg claimProxyConn=9;
+  optional StartProxyReqMsg startProxyReq=10;
+  optional StartProxyRspMsg startProxyRsp=11;
+}
+message NewCtlReqMsg{
+
+}
+message NewCtlRspMsg{
+  string ctl_id=1;
+}
+
+message NewTunnelReqMsg{
+   string local_server_host=1;
+   int32 local_server_port=2;
+}
+message NewTunnelRspMsg{
+   string tun_id=1;
+   string local_server_host=2;
+   int32 local_server_port=3;
+   string proxy_server_host=4;
+   int32 proxy_server_port=5;
+}
+message FreeProxyConnMsg{
+   string tun_id=1;
+   string TConn_id=2;
+}
+
+message NotifyClientCreateProxyMsg{
+    string Tun_id=1;
+    int32 server_proxy_port=2;
+}
+message NotifyShutdownProxyMsg{
+    string Tun_id=1;
+   string TConn_id=2;
+    int32 tran_count=3;
+}
+
+message ClaimProxyConnMsg{
+   string ctl_id=1;
+   string tun_id=2;
+   string TConn_id=3;
+}
+message StartProxyReqMsg{
+   string TConn_id=1;
+   string PublicWaitConnid=2;
+}
+message StartProxyRspMsg{
+   string PublicWaitConnid=1;
+}
+
+
+
+
+
+
+
+
+

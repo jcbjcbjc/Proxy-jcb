@@ -24,15 +24,16 @@ private:
     string tun_id_;
 
     EventLoop* loop_;
+
     std::unique_ptr<TcpServer> PTunnelServer_;
 
-    MutexLock public_fds_mutex_;
-    MutexLock free_proxy_tunnel_conns_mutex_;
+    //MutexLock public_fds_mutex_;
+    //MutexLock free_proxy_tunnel_conns_mutex_;
 
-    ///safe map
+    ///safe map In a Loop
     PTunnelConnMap proxyTunnelMap_;
-    freePTunnelConns freeProxyTunnelConns_ GUARDED_BY(free_proxy_tunnel_conns_mutex_);
-    std::vector<int> undeal_public_fds_ GUARDED_BY(public_fds_mutex_);
+    freePTunnelConns freeProxyTunnelConns_; //GUARDED_BY(free_proxy_tunnel_conns_mutex_);
+    std::vector<int> undeal_public_fds_; //GUARDED_BY(public_fds_mutex_);
 };
 
 
