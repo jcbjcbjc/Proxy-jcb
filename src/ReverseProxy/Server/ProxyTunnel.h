@@ -33,7 +33,7 @@ private:
     ///safe map In a Loop
     PTunnelConnMap proxyTunnelMap_;
     freePTunnelConns freeProxyTunnelConns_; //GUARDED_BY(free_proxy_tunnel_conns_mutex_);
-    std::vector<int> undeal_public_fds_; //GUARDED_BY(public_fds_mutex_);
+    std::vector<TcpConnectionPtr> undeal_public_Conns_; //GUARDED_BY(public_fds_mutex_);
 };
 
 

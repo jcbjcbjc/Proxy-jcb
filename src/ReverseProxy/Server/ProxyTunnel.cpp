@@ -14,9 +14,9 @@ ProxyTunnel::ProxyTunnel(EventLoop *loop, string tun_id,InitTunnelServerCallback
   loop_(loop),
 
   //TODO FIXME
-  PTunnelServer_(new TcpServer(loop,InetAddress(sockets::getAddr(listenFd_)),"TunnelServer"+tun_id)),
-  public_fds_mutex_(),
-  free_proxy_tunnel_conns_mutex_()
+  PTunnelServer_(new TcpServer(loop,InetAddress(sockets::getAddr(listenFd_)),"TunnelServer"+tun_id))
+  //public_fds_mutex_(),
+  //free_proxy_tunnel_conns_mutex_()
 {
     struct sockaddr_in listenAddr;
     socklen_t listenAddrLen = sizeof(listenAddr);

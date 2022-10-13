@@ -62,6 +62,9 @@ void EventLoopThread::threadFunc()
   {
     callback_(&loop);
   }
+  ssize_t n =sockets::write(loopfd_,sizeof(one))
+  ssize_t n = sockets::write(loopFd_, &one, sizeof one);
+
 
   {
     MutexLockGuard lock(mutex_);
