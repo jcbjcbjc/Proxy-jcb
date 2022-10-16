@@ -56,25 +56,22 @@ EventLoop* EventLoopThread::startLoop()
 
 void EventLoopThread::threadFunc()
 {
-  EventLoop loop;
+    EventLoop loop;
 
-  if (callback_)
-  {
-    callback_(&loop);
-  }
-  ssize_t n =sockets::write(loopfd_,sizeof(one))
-  ssize_t n = sockets::write(loopFd_, &one, sizeof one);
+    if (callback_)
+    {
+        callback_(&loop);
+    }
 
+    {
+        MutexLockGuard lock(mutex_);
+        loop_ = &loop;
+        cond_.notify();
+    }
 
-  {
+    loop.loop();
+    //assert(exiting_);
     MutexLockGuard lock(mutex_);
-    loop_ = &loop;
-    cond_.notify();
-  }
-
-  loop.loop();
-  //assert(exiting_);
-  MutexLockGuard lock(mutex_);
-  loop_ = NULL;
+    loop_ = NULL;
 }
 

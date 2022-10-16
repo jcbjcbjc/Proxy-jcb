@@ -106,12 +106,7 @@ message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_T
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
 add_subdirectory(ReverseProxy)
+add_subdirectory(ForwardProxy)
 
-if(MUDUO_BUILD_EXAMPLES)
-  add_subdirectory(examples)
-else()
-  if(CARES_INCLUDE_DIR AND CARES_LIBRARY)
-    add_subdirectory(examples/cdns)
-  endif()
-endif()
+
 

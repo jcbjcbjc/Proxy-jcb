@@ -1,4 +1,4 @@
-#include "examples/socks4a/tunnel.h"
+#include "ForwardProxy/tunnel.h"
 
 #include "muduo/net/Endian.h"
 #include <stdio.h>

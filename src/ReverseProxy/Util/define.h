@@ -29,6 +29,25 @@ int socketBindListen(int port) {
         close(listen_fd);
         return -1;
     }
+
+    // bind
+    struct sockaddr_in server_addr;
+    bzero(&server_addr, sizeof(server_addr));
+    server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(static_cast<uint16_t>(port));
+    if (bind(listen_fd, reinterpret_cast<const sockaddr *>(&server_addr), sizeof(server_addr)) < 0) {
+        close(listen_fd);
+        return -1;
+    }
+
+    // listen：2048代表backlog，用于确定半链接和全链接队列的大小
+    if (listen(listen_fd, 2048) < 0) {
+        close(listen_fd);
+        return -1;
+    }
+
+    return listen_fd;
 }
 
 template <typename keyT, typename valueT>
@@ -80,7 +99,7 @@ std::string rand_str(int len) {
     std::default_random_engine random(rd());  // 用 rd 初始化一个随机数发生器 random
 
     for (int i = 0; i < len; i++) {
-        tmp = random() % 36;  // 随机一个小于 36 的整数，0-9、A-Z 共 36 种字符
+        tmp = static_cast<char>(random() % 36);  // 随机一个小于 36 的整数，0-9、A-Z 共 36 种字符
         if (tmp < 10) {       // 如果随机数小于 10，变换成一个阿拉伯数字的 ASCII
             tmp += '0';
         } else {  // 否则，变换成一个大写字母的 ASCII
