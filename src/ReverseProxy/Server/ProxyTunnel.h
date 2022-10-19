@@ -13,9 +13,10 @@ public:
 
 private:
     void newPublicConn(const TcpConnectionPtr&);
-    void OnPublicConnMessage(const TcpConnectionPtr&,
+    //TODO MOVE TO NEXT LEVEL:PROXYTUNNELCONN
+    /*void OnPublicConnMessage(const TcpConnectionPtr&,
                              Buffer*,
-                             Timestamp);
+                             Timestamp);*/
 
     int listenFd_;
     int listenPort_;
