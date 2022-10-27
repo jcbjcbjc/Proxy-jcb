@@ -2,10 +2,14 @@
 ## Introduction
 A proxy tool transfromed from the muduo library ,support ForwardProxy and ReverseProxy 
 ### Usage
+在根目录dir下执行
+```
+cd src
+chmod +x ./build.sh&&./build.sh
+```
 - 正向代理功能：在根目录dir下执行
    ```
-   mkdir build&&cd build&&cmake ..&&make -j8
-   cd bin
+   cd build&&cd release-proxy-jcb&&cd bin
    #./tcprelay 目标ip地址 目标端口 监听端口 
    ./tcprelay 127.0.0.1 8000 8500
    ```
