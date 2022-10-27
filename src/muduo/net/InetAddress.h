@@ -15,6 +15,7 @@
 #include "muduo/base/StringPiece.h"
 
 #include <netinet/in.h>
+#include <cstddef>
 
 namespace muduo
 {
