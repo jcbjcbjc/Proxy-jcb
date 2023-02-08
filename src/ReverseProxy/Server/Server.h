@@ -9,7 +9,7 @@
 class Server : std::enable_shared_from_this<Server>{
 
 public:
-    Server(EventLoop* eventLoop,int threadNum,int ctlPort,int proxyPort);
+    explicit Server(EventLoop* eventLoop,int threadNum,int ctlPort,int proxyPort);
     ~Server();
 
     void start();

@@ -8,7 +8,7 @@
 
 class ProxyTunnel :public std::enable_shared_from_this<ProxyTunnel>{
 public:
-    ProxyTunnel(EventLoop* loop,string tun_id,InitTunnelServerCallback cb);
+    explicit ProxyTunnel(EventLoop* loop,string tun_id,InitTunnelServerCallback cb);
     ~ProxyTunnel();
 
 private:

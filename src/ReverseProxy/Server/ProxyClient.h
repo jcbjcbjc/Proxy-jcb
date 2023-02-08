@@ -8,7 +8,7 @@
 
 class ProxyClient :public std::enable_shared_from_this<ProxyClient>{
 public:
-    ProxyClient(EventLoop* loop,string& ctl_id,const TcpConnectionPtr& conn )
+    explicit ProxyClient(EventLoop* loop,string& ctl_id,const TcpConnectionPtr& conn )
     :loop_(loop),
     ctl_id_(ctl_id),
     ctl_conn_(conn)
