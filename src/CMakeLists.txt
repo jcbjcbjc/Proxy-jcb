@@ -30,7 +30,7 @@ set(CXX_FLAGS
  -Wwrite-strings
  -march=native
  # -MMD
- -std=c++23
+ -std=c++20
  -rdynamic
  )
 if(CMAKE_BUILD_BITS EQUAL 32)
@@ -50,7 +50,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
-find_package(Boost REQUIRED)
+#find_package(Boost REQUIRED)
 find_package(Protobuf)
 find_package(CURL)
 find_package(ZLIB)
@@ -58,9 +58,9 @@ find_path(CARES_INCLUDE_DIR ares.h)
 find_library(CARES_LIBRARY NAMES cares)
 find_path(MHD_INCLUDE_DIR microhttpd.h)
 find_library(MHD_LIBRARY NAMES microhttpd)
-find_library(BOOSTTEST_LIBRARY NAMES boost_unit_test_framework)
-find_library(BOOSTPO_LIBRARY NAMES boost_program_options)
-find_library(BOOSTSYSTEM_LIBRARY NAMES boost_system)
+#find_library(BOOSTTEST_LIBRARY NAMES boost_unit_test_framework)
+#find_library(BOOSTPO_LIBRARY NAMES boost_program_options)
+#find_library(BOOSTSYSTEM_LIBRARY NAMES boost_system)
 find_path(TCMALLOC_INCLUDE_DIR gperftools/heap-profiler.h)
 find_library(TCMALLOC_LIBRARY NAMES tcmalloc_and_profiler)
 find_path(HIREDIS_INCLUDE_DIR hiredis/hiredis.h)
