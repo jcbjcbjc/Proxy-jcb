@@ -2,6 +2,12 @@
 ## Introduction
 A proxy tool transfromed from the muduo library ,support ForwardProxy and ReverseProxy 
 ### Usage
+#### use docker
+```
+docker build -t proxy-jcb
+docker run --rm -it -v ${PWD}:/mnt -w /mnt proxy-jcb bash
+```
+
 在根目录dir下执行
 ```
 cd src
