@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.23)
 
-project(muduo C CXX)
+project(Proxy-jcb C CXX)
 
 enable_testing()
 
@@ -9,8 +9,8 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # only build examples if this is the main project
-if(CMAKE_PROJECT_NAME STREQUAL "muduo")
-  option(MUDUO_BUILD_EXAMPLES "Build Muduo examples" ON)
+if(CMAKE_PROJECT_NAME STREQUAL "Proxy-jcb")
+  #option(MUDUO_BUILD_EXAMPLES "Build Proxy-jcb examples" ON)
 endif()
 
 set(CXX_FLAGS
@@ -97,27 +97,23 @@ if(THRIFT_COMPILER AND THRIFT_INCLUDE_DIR AND THRIFT_LIBRARY)
 endif()
 
 
-# 设置全局属性 SOURCE_LIST
-set_property( GLOBAL APPEND PROPERTY SOURCE_LIST)
-
 message(${CMAKE_SYSTEM_NAME})
+
+include_directories (${PROJECT_SOURCE_DIR}/arch/header)
+
 
 # 如果是 Linux 系统，选择编译 linux 目录
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
-  include_directories (${PROJECT_SOURCE_DIR}/linux)
-  add_subdirectory (${PROJECT_SOURCE_DIR}/linux)
+  add_subdirectory (${PROJECT_SOURCE_DIR}/arch/linux)
 
   # Window 系统下选择编译 win 目录
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
-  include_directories (${PROJECT_SOURCE_DIR}/win)
-  add_subdirectory (${PROJECT_SOURCE_DIR}/win)
+
+  add_subdirectory (${PROJECT_SOURCE_DIR}/arch/win)
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+  #add_subdirectory (${PROJECT_SOURCE_DIR}/arch/linux)
 ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
-
-# 将 SOURCE_LIST 的内容保存到 SRC_LIST 中
-get_property(SRC_LIST GLOBAL PROPERTY SOURCE_LIST )
-
-message("src list:" ${SRC_LIST})
 
 
 
@@ -143,4 +139,4 @@ add_subdirectory(muduo/net)
 #include_directories(ReverseProxy)
 
 add_subdirectory(ForwardProxy)
-include_directories(ForwardProxy)
+#include_directories(ForwardProxy)

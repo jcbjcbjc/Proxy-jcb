@@ -1,4 +1,4 @@
-add_executable(balancer balancer.cc)
+add_executable(balancer balancer.cc ../arch/header/file.h)
 target_link_libraries(balancer muduo_net)
 
 add_executable(tcprelay tcprelay.cc)
