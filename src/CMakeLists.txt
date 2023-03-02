@@ -96,17 +96,51 @@ if(THRIFT_COMPILER AND THRIFT_INCLUDE_DIR AND THRIFT_LIBRARY)
   message(STATUS "found thrift")
 endif()
 
-include_directories(${Boost_INCLUDE_DIRS})
 
+# 设置全局属性 SOURCE_LIST
+set_property( GLOBAL APPEND PROPERTY SOURCE_LIST)
+
+message(${CMAKE_SYSTEM_NAME})
+
+# 如果是 Linux 系统，选择编译 linux 目录
+IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+  include_directories (${PROJECT_SOURCE_DIR}/linux)
+  add_subdirectory (${PROJECT_SOURCE_DIR}/linux)
+
+  # Window 系统下选择编译 win 目录
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
+  include_directories (${PROJECT_SOURCE_DIR}/win)
+  add_subdirectory (${PROJECT_SOURCE_DIR}/win)
+ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+
+
+# 将 SOURCE_LIST 的内容保存到 SRC_LIST 中
+get_property(SRC_LIST GLOBAL PROPERTY SOURCE_LIST )
+
+message("src list:" ${SRC_LIST})
+
+
+
+
+include_directories(${Boost_INCLUDE_DIRS})
+# include header file path,can be included by the path
 include_directories(${PROJECT_SOURCE_DIR})
 
+message(${PROJECT_SOURCE_DIR})
+
+#include_directories(${PROJECT_SOURCE_DIR}/include)
+#link_directories(${PROJECT_SOURCE_DIR}/lib)
+
+
 string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE)
+
 message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_TYPE}})
 
 add_subdirectory(muduo/base)
 add_subdirectory(muduo/net)
+
 #add_subdirectory(ReverseProxy)
+#include_directories(ReverseProxy)
+
 add_subdirectory(ForwardProxy)
-
-
-
+include_directories(ForwardProxy)

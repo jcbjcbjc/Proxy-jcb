@@ -16,7 +16,8 @@ set(base_SRCS
   TimeZone.cc
         ../../ReverseProxy/Client/Client.cpp ../../ReverseProxy/Server/Server.cpp)
 
-add_library(muduo_base ${base_SRCS})
+add_library(muduo_base STATIC ${base_SRCS})
+#add_library(muduo_base SHARED ${base_SRCS})
 target_link_libraries(muduo_base pthread rt)
 
 #add_library(muduo_base_cpp11 ${base_SRCS})
